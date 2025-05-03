@@ -1,4 +1,18 @@
+using Avaliacao.Romannel.Infra.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Configurar o DbContext com SQL Server
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+        //sql => sql.MigrationsAssembly("Infrastructure") // opcional, define onde estão as migrations
+    )
+);
+
 
 // Add services to the container.
 

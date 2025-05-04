@@ -27,7 +27,8 @@ namespace Avaliacao.Romannel.Domain.Entities
                        string email, 
                        bool ativo,
                        bool isentoie,
-                       string? inscricaoestadual)
+                       string? inscricaoestadual,
+                       ClienteComplemento clientecomplemento)
         {
             NomeRazaoSocial = nomerazaosocial;
             CpfCnpj = cpfcnpj;
@@ -39,6 +40,7 @@ namespace Avaliacao.Romannel.Domain.Entities
             Ativo = ativo;
             IsentoIE = isentoie;
             InscricaoEstadual = inscricaoestadual;
+            ClienteComplemento = clientecomplemento;
         }
     }
 }

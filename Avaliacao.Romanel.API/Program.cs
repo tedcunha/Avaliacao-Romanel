@@ -1,7 +1,13 @@
-using Avaliacao.Romannel.Infra.Persistence;
+﻿using Avaliacao.Romannel.Infra.Persistence;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Configuration;
+using System.Reflection;
+using Avaliacao.Romannel.Application.Validators;
+using Avaliacao.Romannel.Application.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +15,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
-        //sql => sql.MigrationsAssembly("Infrastructure") // opcional, define onde est�o as migrations
+        //sql => sql.MigrationsAssembly("Infrastructure") // opcional, define onde estão as migrations
     )
 );
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateClienteCommandHandler).Assembly));
+
+
+// ➤ FluentValidation
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateClienteValidator>();
 
 // Add services to the container.
 

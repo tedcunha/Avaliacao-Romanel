@@ -11,8 +11,8 @@ namespace Avaliacao.Romannel.Infra.Persistence
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<ClienteComplemento> ClienteComplemento { get; set; }
+        public DbSet<Cliente> Clientes => Set<Cliente>();
+        public DbSet<ClienteComplemento> ClienteComplemento => Set<ClienteComplemento>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,30 +1,25 @@
-﻿using Avaliacao.Romannel.Application.Commands;
-using Avaliacao.Romannel.Domain.Enums;
+﻿using Avaliacao.Romannel.Domain.Enums;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Avaliacao.Romannel.Domain.Entities;
 
 namespace Avaliacao.Romannel.Application.Validators
 {
-    public class CreateClienteValidator : AbstractValidator<CreateClienteCommand>
+    public class CreateClienteValidator : AbstractValidator<Cliente>
     {
         public CreateClienteValidator()
         {
             RuleFor(x => x.NomeRazaoSocial)
-                        .NotEmpty().WithMessage("Nome/Razão Social é obrigatório.");
+                .NotEmpty().WithMessage("Nome/Razão Social é obrigatório");
 
             RuleFor(x => x.CpfCnpj)
-                .NotEmpty().WithMessage("CPF/CNPJ é obrigatório.");
+                .NotEmpty().WithMessage("CPF/CNPJ é obrigatório")
+                .Must(ValidarDocumento).WithMessage("CPF/CNPJ inválido");
 
             RuleFor(x => x.Email)
-                .EmailAddress().WithMessage("E-mail inválido.")
-                .NotEmpty().WithMessage("E-mail é obrigatório.");
+                .NotEmpty().WithMessage("E-mail é obrigatório")
+                .EmailAddress().WithMessage("E-mail inválido");
 
-            RuleFor(x => x.TipoPessoa)
-                .IsInEnum();
+            RuleFor(x => x.TelefoneCel).NotEmpty().WithMessage("Telefone é obrigatório");
 
             When(x => x.TipoPessoa == TipoPessoa.Fisica, () => {
                 RuleFor(x => x.DataNascimento)
@@ -32,13 +27,18 @@ namespace Avaliacao.Romannel.Application.Validators
                     .WithMessage("Cliente deve ter no mínimo 18 anos.");
             });
 
-            When(x => x.TipoPessoa == TipoPessoa.Juridica && !x.IsentoIE, () => {
-                RuleFor(x => x.InscricaoEstadual)
-                    .NotEmpty().WithMessage("IE é obrigatório para PJ não isento.");
+            When(x => x.TipoPessoa == TipoPessoa.Juridica, () =>
+            {
+                RuleFor(x => x.IsentoIE)
+                    .Equal(true).When(x => string.IsNullOrWhiteSpace(x.InscricaoEstadual))
+                    .WithMessage("Informe a IE ou marque como isento");
             });
 
-            RuleFor(x => x.Endereco).NotNull();
+        }
 
+        private bool ValidarDocumento(string doc)
+        {
+            return doc.Length == 11 || doc.Length == 14; // Simplificado: 11 = CPF, 14 = CNPJ
         }
     }
 }

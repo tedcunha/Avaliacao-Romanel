@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{968F38B7-7582-4EEF-9C25-B62ACA6381AC}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avaliacao.Romannel.Domain", "Avaliacao.Romannel.Domain\Avaliacao.Romannel.Domain.csproj", "{7CC0B3C4-7C6F-4FFD-BDBE-64671447F8E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avaliacao.Romannel.Infra", "Avaliacao.Romannel.Infra\Avaliacao.Romannel.Infra.csproj", "{89407CA8-A2C0-46AE-8EFA-3FA449BC27FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avaliacao.Romannel.Application", "Avaliacao.Romannel.Application\Avaliacao.Romannel.Application.csproj", "{408F11DE-0B48-4D28-BB78-65852B390468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{89407CA8-A2C0-46AE-8EFA-3FA449BC27FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89407CA8-A2C0-46AE-8EFA-3FA449BC27FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89407CA8-A2C0-46AE-8EFA-3FA449BC27FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{408F11DE-0B48-4D28-BB78-65852B390468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{408F11DE-0B48-4D28-BB78-65852B390468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{408F11DE-0B48-4D28-BB78-65852B390468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{408F11DE-0B48-4D28-BB78-65852B390468}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,5 +43,6 @@ Global
 		{F65EA8B6-069D-4528-8BAE-B47FD8EF514D} = {968F38B7-7582-4EEF-9C25-B62ACA6381AC}
 		{7CC0B3C4-7C6F-4FFD-BDBE-64671447F8E9} = {968F38B7-7582-4EEF-9C25-B62ACA6381AC}
 		{89407CA8-A2C0-46AE-8EFA-3FA449BC27FE} = {968F38B7-7582-4EEF-9C25-B62ACA6381AC}
+		{408F11DE-0B48-4D28-BB78-65852B390468} = {968F38B7-7582-4EEF-9C25-B62ACA6381AC}
 	EndGlobalSection
 EndGlobal

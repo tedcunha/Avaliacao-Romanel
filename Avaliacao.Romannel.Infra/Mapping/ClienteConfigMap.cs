@@ -18,6 +18,9 @@ namespace Avaliacao.Romannel.Infra.Mapping
             builder.Property(c => c.CreateAt).IsRequired();
             builder.Property(c => c.UpdateAt);
             builder.Property(c => c.Ativo).IsRequired();
+            builder.Property(c => c.TipoPessoa).IsRequired();
+            builder.Property(c => c.IsentoIE).IsRequired();
+            builder.Property(c => c.InscricaoEstadual).HasMaxLength(20);
         }
     }
 }

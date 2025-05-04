@@ -8,6 +8,8 @@ using System.Configuration;
 using System.Reflection;
 using Avaliacao.Romannel.Application.Validators;
 using Avaliacao.Romannel.Application.Commands;
+using Avaliacao.Romannel.Domain.Repositories;
+using Avaliacao.Romannel.Infra.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +21,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     )
 );
 
+builder.Services.AddValidatorsFromAssemblyContaining<CreateClienteValidator>();
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateClienteCommandHandler).Assembly));
+
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 
 // ➤ FluentValidation

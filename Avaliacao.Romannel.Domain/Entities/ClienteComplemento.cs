@@ -14,8 +14,7 @@
         public DateTime? UpdateAt { get; private set; }
         public bool Ativo { get; private set; }
 
-        public ClienteComplemento(long idcliente,
-                                  string endereco,
+        public ClienteComplemento(string endereco,
                                   string numero,
                                   string complemento,
                                   string bairro,
@@ -23,7 +22,6 @@
                                   string estado,
                                   bool ativo)
         {
-            IdCliente = idcliente;
             Endereco = endereco;
             Numero = numero;
             Complemento = complemento;

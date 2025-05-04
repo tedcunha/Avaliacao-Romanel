@@ -1,13 +1,17 @@
 ﻿using Avaliacao.Romannel.Domain.Enums;
 using FluentValidation;
 using Avaliacao.Romannel.Domain.Entities;
+using Avaliacao.Romannel.Application.DTOs;
+using Avaliacao.Romannel.Application.Commands;
 
 namespace Avaliacao.Romannel.Application.Validators
 {
-    public class CreateClienteValidator : AbstractValidator<Cliente>
+    public class CreateClienteValidator : AbstractValidator<CreateClienteCommand>
     {
         public CreateClienteValidator()
         {
+            RuleLevelCascadeMode = CascadeMode.Stop;
+
             RuleFor(x => x.NomeRazaoSocial)
                 .NotEmpty().WithMessage("Nome/Razão Social é obrigatório");
 

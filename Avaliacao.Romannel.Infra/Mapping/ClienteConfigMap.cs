@@ -8,7 +8,7 @@ namespace Avaliacao.Romannel.Infra.Mapping
     {
         public void Configure(EntityTypeBuilder<Cliente> builder)
         {
-            builder.ToTable("dbo.Cliente");
+            builder.ToTable("Cliente");
             builder.HasKey(c => c.IdCliente);
             builder.Property(c => c.NomeRazaoSocial).IsRequired().HasMaxLength(50);
             builder.Property(c => c.CpfCnpj).IsRequired().HasMaxLength(14);

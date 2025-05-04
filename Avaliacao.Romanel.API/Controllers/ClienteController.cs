@@ -1,6 +1,8 @@
 using Avaliacao.Romannel.Application.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Avaliacao.Romanel.API.Controllers
 {
@@ -19,11 +21,24 @@ namespace Avaliacao.Romanel.API.Controllers
         }
 
         [HttpPost("CadastrarCliente")]
-        public async Task<ActionResult<bool>> CreateCliente([FromBody] CreateClienteCommand command)
+        public async Task<IActionResult> CreateCliente([FromBody] CreateClienteCommand command)
         {
             var result = await _mediator.Send(command);
             return result is not null ? Created(string.Empty,result) :  StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        [HttpGet("PesquisarClientePorID/{IdCliente}")]
+        public async Task<IActionResult> GetClientePorId([FromRoute] long IdCliente)
+        {
+            var result = await _mediator.Send(new GetClienteIDCommand { IdCliente = IdCliente});
+            return result is not null ? Created(string.Empty, result) : StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpDelete("RemoveCliente/{IdCliente}")]
+        public async Task<IActionResult> DeleteCliente([FromRoute] long IdCliente)
+        {
+            var result = await _mediator.Send(new DeleteClienteCommand { IdCliente = IdCliente });
+            return result ? Created(string.Empty, result) : StatusCode(StatusCodes.Status500InternalServerError);
+        }
     }
 }
